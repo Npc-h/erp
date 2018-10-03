@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">  
+	
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- 发送邮件的协议 -->
+        <property name="protocol" value="smtp"/>
+        <!-- 邮件服务器地址 -->
+        <property name="host" value="smtp.sina.com"/>
+        <!-- 发送邮件的端口 -->
+        <property name="port" value="465" />
+        <!-- 账号 -->
+        <property name="username" value="npc_h@sina.com"/>
+        <!-- 账号的密码 -->
+        <property name="password" value="a13100558268"/>
+        <!-- mail的配置 -->
+        <property name="javaMailProperties">
+            <props>
+            	<!-- 验证：用户名username 与发件是否一致 -->
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- 传输层的加密 -->
+                <prop key="mail.smtp.ssl.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+	
+	<bean id="mailUtil" class="cn.itcast.erp.util.MailUtil">
+		<property name="javaMailSender" ref="javaMailSender"></property>
+		<!-- 发件人 -->
+		<property name="from" value="npc_h@sina.com"></property>
+	</bean>
+</beans>
+	
